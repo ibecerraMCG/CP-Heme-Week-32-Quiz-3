@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 32 Wednesday & Thursday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */[data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */[data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */[data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Section Navigation --- */
+        .section-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-nav button {
+            background-color: var(--highlight-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .section-nav button:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            scroll-margin-top: 140px; /* Offset for sticky header */
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            .header-top { flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+            .section-nav { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="header-top">
+            <h1>Week 32 Wednesday & Thursday Practice Quiz</h1>
+            <div class="controls-wrapper">
+                <!-- Pin Button -->
+                <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                    📍
+                </button>
+                
+                <div class="theme-control">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select" onchange="changeTheme(this.value)">
+                        <option value="dark">Modern Dark</option>
+                        <option value="midnight">Midnight</option>
+                        <option value="light">Modern Light</option>
+                        <option value="legacy-dark">Legacy Dark</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="contrast">High Contrast</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- Dynamic Navigation Bar injected via JS -->
+        <div class="section-nav" id="section-nav"></div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData =[
+            // --- Section 1: Pleural Disease ---
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO1: Discuss [specific body fluid] formation.",
+                fullLO: "LO1: Discuss pleural fluid formation",
+                question: "A 45-year-old healthy man undergoes a radiologic study that evaluates the normal physiological dynamics of his thoracic cavity. The physician explains that a small amount of fluid is continuously produced to lubricate the pleural space. This fluid is primarily formed by which of the following anatomic structures?",
+                options: {
+                    A: "Alveolar macrophages",
+                    B: "Bronchial mucosal glands",
+                    C: "Parietal pleura",
+                    D: "Pulmonary capillaries",
+                    E: "Visceral pleura"
+                },
+                correctAnswer: "C",
+                rationale: "In a healthy individual, normal pleural fluid (approximately 15-20 mL produced daily) is primarily formed by the parietal pleura. The fluid formation is driven by the balance of hydrostatic and oncotic pressures between the visceral and parietal pleura.",
+                source: "Pleural Disease PDF, Slide 7: \"Pleural Fluid Formation • Primarily formed by parietal pleura\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO1: Discuss [specific body fluid] formation.",
+                fullLO: "LO1: Discuss pleural fluid formation",
+                question: "A physiologist is studying the turnover rate of pleural fluid in animal models. She notes that while fluid is continuously produced into the pleural cavity, it does not accumulate under normal conditions because it is constantly drained. Which of the following is the primary physiological route of exit for this fluid?",
+                options: {
+                    A: "Active transport across the visceral pleura",
+                    B: "Evaporation into the alveolar airspace",
+                    C: "Excretion via stomata into the lymphatics",
+                    D: "Reabsorption directly into the pulmonary artery",
+                    E: "Sequestration by pleural macrophages"
+                },
+                correctAnswer: "C",
+                rationale: "The normal volume of pleural fluid is maintained by a balance of influx and efflux. The fluid exits the pleural space via stomata that lead directly into the lymphatic system.",
+                source: "Pleural Disease PDF, Slide 8: \"Pleural Fluid Formation... • Fluid exits via stomata into lymphatics\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO2: Discuss mechanisms for development of [specific respiratory condition].",
+                fullLO: "LO2: Discuss mechanisms for development of pleural effusions",
+                question: "A 68-year-old man presents with worsening shortness of breath, orthopnea, and bilateral lower extremity edema. A chest radiograph reveals bilateral pleural effusions. Echocardiography confirms a severely reduced ejection fraction consistent with congestive heart failure. Which of the following is the primary mechanism responsible for the accumulation of pleural fluid in this patient?",
+                options: {
+                    A: "Decreased oncotic pressure",
+                    B: "Impaired lymphatic drainage",
+                    C: "Increased hydrostatic pressure",
+                    D: "Increased negative pressure in the pleural cavity",
+                    E: "Increased pleural capillary permeability"
+                },
+                correctAnswer: "C",
+                rationale: "Effusions accumulate through several distinct pathophysiologic mechanisms. In the setting of congestive heart failure (CHF), the primary driver of fluid accumulation is an increase in hydrostatic pressure, driving fluid into the pleural space.",
+                source: "Pleural Disease PDF, Slide 10: \"How Do Effusions Accumulate? ↑ hydrostatic pressure (CHF)\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO2: Discuss mechanisms for development of [specific respiratory condition].",
+                fullLO: "LO2: Discuss mechanisms for development of pleural effusions",
+                question: "A 55-year-old woman with severe cirrhosis presents with increasing abdominal girth and shortness of breath. Laboratory testing reveals a serum albumin level of 2.1 g/dL (normal 3.5-5.0 g/dL). A right-sided pleural effusion is identified on a chest radiograph. Which of the following mechanisms contributes most significantly to the development of this effusion based on her laboratory findings?",
+                options: {
+                    A: "Decreased oncotic pressure",
+                    B: "Impaired lymphatic drainage",
+                    C: "Increased hydrostatic pressure",
+                    D: "Increased negative pressure in the pleural cavity",
+                    E: "Increased pleural capillary permeability"
+                },
+                correctAnswer: "A",
+                rationale: "Hypoalbuminemia, which is common in severe liver disease (cirrhosis), leads to a decrease in intravascular oncotic pressure. This loss of oncotic pull allows fluid to leak into the pleural space. Additionally, ascites can move directly into the chest to form a hepatic hydrothorax.",
+                source: "Pleural Disease PDF, Slide 10: \"How Do Effusions Accumulate? ... ↓ oncotic pressure (hypoalbuminemia)\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO3: Discuss [specific diagnostic criteria] for differentiating transudates from exudates.",
+                fullLO: "LO3: Discuss Light’s criteria for differentiating transudates from exudates",
+                question: "A 60-year-old man undergoes a diagnostic thoracentesis for a newly discovered unilateral pleural effusion. Laboratory analysis of the pleural fluid reveals a protein level of 4.0 g/dL and an LDH of 150 IU/L. Simultaneous serum analysis shows a total protein of 6.0 g/dL and an LDH of 180 IU/L. The upper limit of normal for serum LDH is 200 IU/L. Based on Light's criteria, what is the most accurate classification of this fluid?",
+                options: {
+                    A: "It is an exudate because the pleural fluid LDH is greater than 200.",
+                    B: "It is an exudate because the pleural fluid protein to serum protein ratio is greater than 0.5.",
+                    C: "It is an exudate because the pleural fluid LDH to serum LDH ratio is greater than 0.6.",
+                    D: "It is a transudate because the pleural fluid LDH is less than the serum LDH.",
+                    E: "It is a transudate because the pleural fluid protein is less than the serum protein."
+                },
+                correctAnswer: "B",
+                rationale: "According to Light's criteria, a fluid is classified as an exudate if it meets at least one of the following: PF protein/serum protein >0.5, PF LDH/serum LDH >0.6, or PF LDH >200 (or >2/3 the upper limit of normal for serum LDH). Here, the PF protein/serum protein ratio is 4.0/6.0 = 0.67, which is >0.5, satisfying the criteria for an exudate.",
+                source: "Pleural Disease PDF, Slide 23: \"Light’s Criteria • Pleural fluid protein / serum protein >0.5... Exudate = meets at least one of Light’s criteria\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO3: Discuss [specific diagnostic criteria] for differentiating transudates from exudates.",
+                fullLO: "LO3: Discuss Light’s criteria for differentiating transudates from exudates",
+                question: "A 72-year-old woman with a history of chronic kidney disease and nephrotic syndrome presents with a pleural effusion. Thoracentesis is performed. Fluid analysis yields a pleural fluid protein to serum protein ratio of 0.3, and a pleural fluid LDH to serum LDH ratio of 0.4. The pleural fluid LDH is 90 IU/L. Which of the following is the most accurate statement regarding this patient's pleural effusion?",
+                options: {
+                    A: "It is an exudate caused by active disease of the pleura.",
+                    B: "It is an exudate caused by impaired lymphatic drainage.",
+                    C: "It is an exudate caused by increased pleural capillary permeability.",
+                    D: "It is a transudate caused by a localized malignancy.",
+                    E: "It is a transudate caused by an imbalance in hydrostatic or oncotic pressure."
+                },
+                correctAnswer: "E",
+                rationale: "The fluid does not meet any of Light's criteria (protein ratio < 0.5, LDH ratio < 0.6, absolute LDH < 200), meaning it is a transudate. Transudates are caused by imbalances in hydrostatic or oncotic pressures (e.g., congestive heart failure, cirrhosis, or nephrotic syndrome) with no intrinsic disease of the pleura itself.",
+                source: "Pleural Disease PDF, Slides 22 & 24: \"Transudate or Exudate? Transudate – an imbalance in the hydrostatic or oncotic pressure with no intrinsic disease of the pleura... nephrotic syndrome\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO4: Differentiate the causes of [specific respiratory condition] by clinical findings and test results.",
+                fullLO: "LO4: Differentiate the causes of pleural effusions by clinical findings and test results",
+                question: "A 39-year-old man presents with a 2-week history of fever and left-sided chest pain. He has a history of heavy alcohol use and has poor dentition. He is coughing up foul-smelling sputum. A thoracentesis is performed, yielding thick pus with a foul odor. Analysis of the pleural fluid reveals a WBC count of 78,000/µL with 100% neutrophils, a glucose of 12 mg/dL, and a pH of 6.8. Which of the following is the most likely diagnosis?",
+                options: {
+                    A: "Connective tissue disease",
+                    B: "Empyema",
+                    C: "Hepatic hydrothorax",
+                    D: "Malignant pleural effusion",
+                    E: "Pulmonary embolism"
+                },
+                correctAnswer: "B",
+                rationale: "The patient's clinical history (fever, poor dentition, alcohol use, foul-smelling sputum) and pleural fluid findings (thick pus, WBC > 50,000/µL, low glucose, pH < 7.2) point directly to an empyema, which often requires chest tube drainage and/or decortication surgery.",
+                source: "Pleural Disease PDF, Slides 30, 34, & 37: \"Case #2 • 39 y.o. WM has 2 week history of fever and left sided chest pain • Foul-smelling sputum • Poor dentition, heavy alcohol use... Thoracentesis Pleural Fluid Studies: Thick pus with foul odor... WBC 78,000; 100% neutrophils... Glucose 12... pH 6.8\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO4: Differentiate the causes of [specific respiratory condition] by clinical findings and test results.",
+                fullLO: "LO4: Differentiate the causes of pleural effusions by clinical findings and test results",
+                question: "A 54-year-old man with a long history of alcohol abuse presents with severe shortness of breath. Physical examination demonstrates palmar erythema, spider nevi, and low blood pressure. A chest radiograph reveals a large right-sided pleural effusion. Thoracentesis yields fluid with a protein level of 2.2 mg/dL (serum 5.1), an LDH of 100 IU/L (serum 225), and negative cytology. Which of the following is the most appropriate definitive treatment for the underlying cause of this patient's effusion?",
+                options: {
+                    A: "Chest tube drainage with tPa-DNAse",
+                    B: "Liver transplant",
+                    C: "Long-term systemic corticosteroids",
+                    D: "Serial therapeutic thoracenteses",
+                    E: "Surgical decortication of the pleura"
+                },
+                correctAnswer: "B",
+                rationale: "The patient has classic signs of cirrhosis (palmar erythema, spider nevi, alcohol abuse history) and a transudative right-sided pleural effusion, identifying this as a hepatic hydrothorax (leakage of ascites into the chest). This condition is extremely difficult to treat, and the best definitive treatment may be a liver transplant.",
+                source: "Pleural Disease PDF, Slides 38 & 41: \"Case #3 • 54 yo WM with shortness of breath • Long history of alcohol abuse • Cirrhosis... Hepatic Hydrothorax • Right-sided pleural effusion • Transudate • Leakage of ascites into chest • Extremely difficult to treat • Best treatment may be liver transplant\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO5: Define [specific pleural disorder] and discuss the different types of this disorder.",
+                fullLO: "LO5: Define pneumothorax and discuss the different types of this disorder.",
+                question: "A 25-year-old man is brought to the emergency department after suddenly developing severe, sharp right-sided chest pain and shortness of breath while watching television. He is tall, thin, and has a 5-pack-year smoking history. He has no prior medical history and denies any recent trauma. A chest radiograph reveals air in the right pleural space. Which of the following is the most likely pathophysiologic mechanism for his condition?",
+                options: {
+                    A: "Iatrogenic laceration of the visceral pleura",
+                    B: "Impaired pleural lymphatic drainage",
+                    C: "Malignant erosion of a pulmonary blood vessel",
+                    D: "Rupture of apical subpleural blebs",
+                    E: "Severe chronic obstructive pulmonary disease (COPD)"
+                },
+                correctAnswer: "D",
+                rationale: "The patient is experiencing a primary spontaneous pneumothorax, defined by the presence of air in the pleural space without trauma or underlying lung disease. It is most common in tall, thin, young males (20-40 years of age) who smoke. The underlying mechanism is the rupture of apical subpleural blebs.",
+                source: "Pleural Disease PDF, Slides 42 & 47: \"Pneumothorax • Presence of air or gas in the pleural space... Primary Spontaneous PTX • Rupture of apical subpleural blebs • Common in tall, thin patients • Smokers • Male • 20-40 years of age\""
+            },
+            {
+                section: "Pleural Disease",
+                maskedLO: "LO5: Define [specific pleural disorder] and discuss the different types of this disorder.",
+                fullLO: "LO5: Define pneumothorax and discuss the different types of this disorder.",
+                question: "A 30-year-old man is brought to the trauma bay following a high-speed motor vehicle collision. En route, his respiratory status suddenly deteriorates. He exhibits labored respirations, a rapidly dropping blood pressure, and a severe decrease in venous return. Based on this sudden clinical deterioration, which of the following is the most appropriate immediate next step in management?",
+                options: {
+                    A: "Await a portable chest radiograph to confirm the diagnosis",
+                    B: "Immediate evacuation of air from the pleural space",
+                    C: "Perform an emergent thoracentesis for fluid analysis",
+                    D: "Send blood cultures and start broad-spectrum antibiotics",
+                    E: "Transfer the patient immediately to the CT scanner"
+                },
+                correctAnswer: "B",
+                rationale: "The patient's sudden hemodynamic compromise (↓ BP, ↓ venous return, labored breathing) after trauma strongly indicates a tension pneumothorax. This is a medical emergency requiring immediate evacuation of the pleural space (e.g., needle decompression); the clinician should not wait for a chest radiograph.",
+                source: "Pleural Disease PDF, Slide 49: \"Tension Pneumothorax • Medical emergency • Sudden deterioration in cardiopulmonary status • ↓ venous return • ↓ BP • labored respirations • Immediate evacuation • Don’t wait for chest radiograph\""
+            },
+
+            // --- Section 2: Diagnostic Approach to Lung Cancer ---
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO1: Identify high risk populations who need to be screened for [specific cancer].",
+                fullLO: "LO1: Identify high risk populations who need to be screened for lung cancer",
+                question: "A 60-year-old man comes to the primary care clinic for an annual physical examination. He has no active respiratory symptoms. He reports a smoking history of 1 pack per day for 25 years, but successfully quit smoking 10 years ago. To assess his risk for lung cancer, the physician consults the 2021 USPSTF guidelines. Which of the following is the most appropriate lung cancer screening recommendation for this patient?",
+                options: {
+                    A: "Annual low-dose computed tomography (CT)",
+                    B: "Annual positron emission tomography (PET) scan",
+                    C: "Annual standard chest radiograph",
+                    D: "Biannual sputum cytology",
+                    E: "No screening is indicated because he quit smoking over 5 years ago"
+                },
+                correctAnswer: "A",
+                rationale: "According to the 2021 USPSTF recommendations, annual screening for lung cancer with low-dose CT is indicated for adults aged 50 to 80 years who have at least a 20 pack-year smoking history and currently smoke or have quit within the past 15 years. This patient meets all criteria (age 60, 25 pack-years, quit 10 years ago).",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slide 14: \"LUNG CANCER SCREENING USPSTF 2021 Recommendation: Adults aged 50 to 80 years, 20 pack-year smoking history, Current smoker or have quit within the past 15 years, Screen for lung cancer with low-dose computed tomography (CT) annually\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO1: Identify high risk populations who need to be screened for [specific cancer].",
+                fullLO: "LO1: Identify high risk populations who need to be screened for lung cancer",
+                question: "A primary care physician is reviewing the charts of several patients to determine who qualifies for lung cancer screening based on the 2021 USPSTF guidelines. Which of the following patients meets the exact criteria for annual low-dose computed tomography screening?",
+                options: {
+                    A: "A 45-year-old male who actively smokes 2 packs a day (30 pack-years)",
+                    B: "A 55-year-old female who has never smoked but has a strong family history of lung cancer",
+                    C: "A 65-year-old female who actively smokes 1 pack a day (25 pack-years)",
+                    D: "A 70-year-old male who quit smoking 20 years ago (40 pack-years)",
+                    E: "A 75-year-old male who actively smokes half a pack a day (15 pack-years)"
+                },
+                correctAnswer: "C",
+                rationale: "The USPSTF criteria require the patient to be 50-80 years old, have a ≥20 pack-year smoking history, and be a current smoker or have quit within the past 15 years. The 65-year-old female meets all criteria. The 45-year-old is too young. The 70-year-old quit >15 years ago. The 75-year-old has <20 pack-years.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slide 14: \"Adults aged 50 to 80 years, 20 pack-year smoking history, Current smoker or have quit within the past 15 years\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO2: Know which [specific pulmonary findings] need to be worked up.",
+                fullLO: "LO2: Know which pulmonary nodules need to worked up",
+                question: "A 65-year-old woman undergoes a chest CT scan to evaluate chronic cough. The scan reveals a single, well-circumscribed, rounded radiographic opacity surrounded entirely by lung parenchyma. The radiologist measures the lesion and classifies it as a solitary pulmonary nodule (SPN) rather than a lung mass. For this classification to be accurate, the maximum diameter of the lesion must be less than:",
+                options: {
+                    A: "1 cm",
+                    B: "2 cm",
+                    C: "3 cm",
+                    D: "4 cm",
+                    E: "5 cm"
+                },
+                correctAnswer: "C",
+                rationale: "A solitary pulmonary nodule (SPN) is defined as a focal, rounded radiographic opacity surrounded by parenchyma that is less than 3 cm in diameter. Lesions greater than 3 cm are formally classified as lung masses.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slide 17: \"Lung Nodule(s)... The solitary pulmonary nodule (SPN) is a round lesion less than 3 cm in diameter. >3 cm are Lung Masses\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO2: Know which[specific pulmonary findings] need to be worked up.",
+                fullLO: "LO2: Know which pulmonary nodules need to worked up",
+                question: "A 44-year-old man undergoes a CT scan of the chest following a mechanical fall. He has never smoked cigarettes. The scan incidentally reveals a smooth, 5 mm nodule in the left upper lobe. Based on his clinical history and the nodule's characteristics, his pre-test probability of malignancy is deemed to be very low. Which of the following is the most appropriate management plan?",
+                options: {
+                    A: "Bronchoscopy with navigation",
+                    B: "CT guided needle biopsy",
+                    C: "Observation with serial chest CT",
+                    D: "Positron emission tomography (PET) scan",
+                    E: "Surgical resection"
+                },
+                correctAnswer: "C",
+                rationale: "For patients with a low clinical pre-test probability of malignancy (<5%)—such as a young, non-smoking patient with a small (5 mm) nodule—the recommended management is radiographic observation using serial chest CT scans over a 2-year period.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slides 47 & 48: \"CASE 44 year old male had a CT chest after a fall, 5 mm nodule in the LUL, Never smoked... CASE ANALYSIS RISK FACTORS Likelihood of malignancy very low... Observation with serial chest CT\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO3: Have a broad understanding of the procedures available to establish a diagnosis of [specific cancer].",
+                fullLO: "LO3: Have a broad understanding of the procedures available to establish a diagnosis of lung cancer",
+                question: "A 70-year-old man with a 50-pack-year smoking history presents with a new, 1.3 cm pulmonary nodule with spiculated borders in the right upper lobe. His physician decides to order a Positron Emission Tomography (PET) scan to help evaluate the nodule. What is the primary limitation of using a PET scan for evaluating very small lung nodules?",
+                options: {
+                    A: "It frequently yields false negatives in small lesions.",
+                    B: "It identifies calcification but cannot assess metabolic activity.",
+                    C: "It is highly invasive and carries a significant risk of pneumothorax.",
+                    D: "It is only approved for use in lesions located centrally in the airways.",
+                    E: "It is unable to detect highly metabolic tissue."
+                },
+                correctAnswer: "A",
+                rationale: "PET scans rely on the uptake of radioactive material in highly metabolic tissue. While useful for nodules >8mm, PET is not useful in very small lesions because it can yield false negative results.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slides 11 & 41: \"PET not useful in small lesions as it can be false negative... Nodules >8mm\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO3: Have a broad understanding of the procedures available to establish a diagnosis of [specific cancer].",
+                fullLO: "LO3: Have a broad understanding of the procedures available to establish a diagnosis of lung cancer",
+                question: "A 72-year-old patient requires a tissue biopsy of a suspicious lung nodule. The multidisciplinary tumor board is reviewing the imaging to decide on the best tissue sampling modality. They note that the nodule is located in the extreme periphery of the lung, abutting the pleural surface, making it difficult to reach via the central airways. Which of the following is the most appropriate tissue sampling modality for this specific lesion?",
+                options: {
+                    A: "CT guided needle biopsy",
+                    B: "Endobronchial ultrasound (EBUS)",
+                    C: "Radial endobronchial ultrasound",
+                    D: "Robotic bronchoscopy",
+                    E: "Standard rigid bronchoscopy"
+                },
+                correctAnswer: "A",
+                rationale: "The choice of tissue sampling modality depends on the location of the nodule. CT guided needle biopsy is specifically indicated and ideal if the nodule is peripherally located, whereas bronchoscopy is better suited for centrally located or airway-accessible lesions.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slide 37: \"Choice of Tissue Sampling Modality... CT guided biopsy if nodule is peripherally located\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO4: Know the impact of early diagnosis on treatment and cure in different sub types of [specific cancer].",
+                fullLO: "LO4: Know the impact of early diagnosis on treatment and cure in different sub types of lung cancer",
+                question: "A public health initiative aims to increase the rate of low-dose CT screening among high-risk populations. The primary justification for this program is that detecting lung cancer at an early stage (e.g., Stage A, presenting as a solitary nodule) significantly alters the prognosis. If a malignant nodule is detected and treated at Stage A, what is the approximate 5-year survival rate?",
+                options: {
+                    A: "Less than 10%",
+                    B: "20%",
+                    C: "30%",
+                    D: "40%",
+                    E: "Greater than 60%"
+                },
+                correctAnswer: "E",
+                rationale: "Lung cancer begins as a lung nodule. Malignant nodules detected early represent a potentially curable form of lung cancer. The survival rate for Stage A lung cancer is highly favorable, reported as >60% at 5 years.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slide 16: \"The Dilemma • Malignant nodules can represent a potentially curable form of lung cancer • Stage A survival: >60% at 5 years\""
+            },
+            {
+                section: "Diagnostic Approach to Lung Cancer",
+                maskedLO: "LO4: Know the impact of early diagnosis on treatment and cure in different sub types of [specific cancer].",
+                fullLO: "LO4: Know the impact of early diagnosis on treatment and cure in different sub types of lung cancer",
+                question: "A 65-year-old smoker is found to have an enlarging 2.0 cm nodule on serial CT scans. The nodule exhibits a high standardized uptake value (SUV) on PET scan, indicating a very high clinical probability of early-stage malignancy. To maximize the chance of cure and simultaneously obtain a definitive tissue diagnosis, which of the following is the best management option for this patient?",
+                options: {
+                    A: "Continuous radiographic observation",
+                    B: "Empirical radiation therapy",
+                    C: "Palliative chemotherapy",
+                    D: "Sputum cytology",
+                    E: "Surgical resection"
+                },
+                correctAnswer: "E",
+                rationale: "When there is a high clinical pre-test probability of malignancy (e.g., due to smoking history, age, nodule growth, and high PET avidity) in an early-stage nodule, the best approach is surgical resection, which serves as both a diagnostic and therapeutic (curative) measure.",
+                source: "Diagnostic Approach to Lung Cancer PDF, Slide 43: \"CASE ANALYSIS... The likelihood of malignancy was very high... Best option surgical resection (diagnostic and therapeutic)\""
+            },
+
+            // --- Section 3: Management of Lung Cancer ---
+            {
+                section: "Management of Lung Cancer",
+                maskedLO: "LO1: Identify the most commonly used chemotherapeutic agents for [specific lung cancers].",
+                fullLO: "LO1: Identify the most commonly used chemotherapeutic agents for small cell and non-small cell carcinomas",
+                question: "A 64-year-old man is undergoing chemotherapy for limited-stage small cell lung cancer. His regimen includes a chemotherapeutic agent that specifically inhibits DNA topoisomerase II. This inhibition prevents DNA re-ligation, causing critical errors during the S and G2 phases of the cell cycle, ultimately leading to apoptosis. Which of the following drugs is most likely being administered?",
+                options: {
+                    A: "Bevacizumab",
+                    B: "Cisplatin",
+                    C: "Etoposide",
+                    D: "Paclitaxel",
+                    E: "Vinorelbine"
+                },
+                correctAnswer: "C",
+                rationale: "Etoposide is a phase-specific agent (S and G2 phases) that works by inhibiting DNA topoisomerase II, preventing DNA re-ligation and causing critical errors that lead to cell death. It is frequently combined with cisplatin for SCLC.",
+                source: "Management of Lung Cancer PDF, Slide 6: \"DNA-Topoisomerase II Inhibitor • Etoposide inhibits DNA topoisomerase II, inhibiting DNA re-ligation/resealing... Etoposide is cell cycle dependent and phase specific, affecting mainly the S and G2 phases of cell division.\""
+            },
+            {
+                section: "Management of Lung Cancer",
+                maskedLO: "LO1: Identify the most commonly used chemotherapeutic agents for[specific lung cancers].",
+                fullLO: "LO1: Identify the most commonly used chemotherapeutic agents for small cell and non-small cell carcinomas",
+                question: "A 55-year-old woman receives chemotherapy for advanced non-small cell lung cancer. Following the infusion, she experiences peripheral neuropathy. Her oncologist reviews her medications and identifies a taxane agent that acts by hyper-stabilizing microtubule structure, destroying the cell's ability to use its cytoskeleton flexibly. Which of the following agents utilizes this specific mechanism of action?",
+                options: {
+                    A: "Alectinib",
+                    B: "Cisplatin",
+                    C: "Etoposide",
+                    D: "Paclitaxel",
+                    E: "Vinorelbine"
+                },
+                correctAnswer: "D",
+                rationale: "Paclitaxel (a taxane) binds to the β subunit of tubulin and hyper-stabilizes microtubules, preventing their disassembly and destroying the cell's flexible use of its cytoskeleton. (Vinorelbine, in contrast, prevents microtubule assembly/polymerization).",
+                source: "Management of Lung Cancer PDF, Slide 8: \"Taxane Agents • Paclitaxel interferes with the normal function of microtubule growth by hyper-stabilizing their structure. • This destroys the cell's ability to use its cytoskeleton in a flexible manner.\""
+            },
+            {
+                section: "Management of Lung Cancer",
+                maskedLO: "LO2: Describe a typical treatment regimen for [specific lung cancers].",
+                fullLO: "LO2: Describe a typical treatment regimen for small cell and non-small cell carcinomas",
+                question: "A 59-year-old man is diagnosed with limited-stage small cell lung cancer (SCLC) that is confined to one hemithorax without metastatic spread to distant organs. The multidisciplinary oncology team formulates a treatment plan to maximize his chances of response. According to standard guidelines, which of the following is the most appropriate initial treatment regimen for this patient?",
+                options: {
+                    A: "Carboplatin, paclitaxel, and bevacizumab",
+                    B: "Cisplatin and vinorelbine alone",
+                    C: "Cisplatin and etoposide with concurrent thoracic radiation therapy",
+                    D: "Surgical resection followed by adjuvant pembrolizumab",
+                    E: "Targeted therapy with osimertinib"
+                },
+                correctAnswer: "C",
+                rationale: "For limited-stage small cell lung cancer (SCLC), the preferred and typical treatment regimen is chemotherapy with cisplatin and etoposide, combined with concurrent thoracic radiation therapy to improve the likelihood of response. Surgery is rarely used unless it is a solitary nodule without lymph node involvement.",
+                source: "Management of Lung Cancer PDF, Slides 19 & 20: \"Question 1: A 59-year-old man is diagnosed with limited-stage SCLC comes to the clinic for treatment... D. Cisplatin, etoposide along with concurrent thoracic radiation therapy. For limited-stage SCLC, the preferred chemo is cisplatin + etoposide. Thoracic radiation should be administered concurrently with chemo...\""
+            },
+            {
+                section: "Management of Lung Cancer",
+                maskedLO: "LO2: Describe a typical treatment regimen for [specific lung cancers].",
+                fullLO: "LO2: Describe a typical treatment regimen for small cell and non-small cell carcinomas",
+                question: "A 60-year-old man is diagnosed with Stage IIA non-small cell lung cancer (NSCLC) following an incidental finding on a chest CT. The primary tumor is surgically resected. Following successful surgery, the oncologist recommends an adjuvant systemic therapy regimen to reduce the risk of recurrence. Which of the following drug combinations is a typical adjuvant regimen for this stage of disease?",
+                options: {
+                    A: "Alectinib and entrectinib",
+                    B: "Cisplatin and etoposide",
+                    C: "Dabrafenib and trametinib",
+                    D: "Durvalumab and pembrolizumab",
+                    E: "Etoposide and radiation therapy alone"
+                },
+                correctAnswer: "B",
+                rationale: "Stage IIA and IIB non-small cell lung cancers are primarily treated with surgery followed by adjuvant chemotherapy. The standard adjuvant chemotherapy consists of platinum-based regimens, such as cisplatin/etoposide, cisplatin/vinorelbine, or carboplatin/paclitaxel.",
+                source: "Management of Lung Cancer PDF, Slide 4: \"Non-Small Cell Lung Cancer: Local Disease... Stage IIA and IIB primarily treated with surgery, followed by adjuvant chemotherapy ◦ Platinum-based regimens ◦ Cisplatin/etoposide\""
+            },
+            {
+                section: "Management of Lung Cancer",
+                maskedLO: "LO3: Given a clinical scenario, determine the most appropriate drug to prescribe for treatment of [specific lung cancers].",
+                fullLO: "LO3: Given a clinical scenario, determine the most appropriate drug to prescribe for treatment of small cell and non-small cell carcinomas",
+                question: "A 64-year-old woman with a recent diagnosis of metastatic squamous non-small cell lung cancer (NSCLC) is found to be negative for any targetable genetic mutations (e.g., EGFR, ALK, ROS1). Fluorescence in situ hybridization (FISH) analysis indicates a PD-L1 expression level of 75%. She is scheduled to receive baseline chemotherapy with carboplatin and paclitaxel. Which of the following monoclonal antibodies should be added to her regimen to improve therapeutic efficacy?",
+                options: {
+                    A: "Alectinib",
+                    B: "Bevacizumab",
+                    C: "Osimertinib",
+                    D: "Pembrolizumab",
+                    E: "Trastuzumab"
+                },
+                correctAnswer: "D",
+                rationale: "In advanced NSCLC that lacks a targetable genetic mutation but strongly expresses PD-L1, the addition of a PD-1/PD-L1 inhibitor (such as pembrolizumab) to standard chemotherapy significantly improves immune reactivity and tumor immunosurveillance.",
+                source: "Management of Lung Cancer PDF, Slides 11, 21, & 22: \"Question 2... FISH analysis indicated PD-L1 expression above 70%. Which monoclonal antibody should be added... B. Pembrolizumab\" and \"PD-L1 Positive -> PD-1/PD-L1 Inhibitor (prembolizumab)\""
+            },
+            {
+                section: "Management of Lung Cancer",
+                maskedLO: "LO3: Given a clinical scenario, determine the most appropriate drug to prescribe for treatment of [specific lung cancers].",
+                fullLO: "LO3: Given a clinical scenario, determine the most appropriate drug to prescribe for treatment of small cell and non-small cell carcinomas",
+                question: "A 50-year-old woman who has never smoked is diagnosed with advanced, unresectable adenocarcinoma of the lung. Molecular profiling of the tumor tissue reveals a somatic mutation in the Epidermal Growth Factor Receptor (EGFR) gene, specifically an exon 19 deletion. Based on these molecular findings, which of the following is the most appropriate targeted therapy for this patient?",
+                options: {
+                    A: "Alectinib",
+                    B: "Dabrafenib",
+                    C: "Entrectinib",
+                    D: "Osimertinib",
+                    E: "Pembrolizumab"
+                },
+                correctAnswer: "D",
+                rationale: "Patients with advanced NSCLC harboring specific targetable mutations should be treated with the corresponding tyrosine kinase inhibitors. For EGFR mutations (such as exon 19 deletions or T790M), EGFR Tyrosine Kinase Inhibitors like osimertinib or erlotinib are indicated.",
+                source: "Management of Lung Cancer PDF, Slide 11: \"Targetable genetic mutation -> EGFR -> EGFR Tyrosine Kinase Inhibitor (TKI): Osimertinib, Erlotinib\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+        const sectionNav = document.getElementById('section-nav');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            let sectionIndex = 0;
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    
+                    // Create ID for scrolling
+                    const sectionId = 'sec-' + sectionIndex;
+                    
+                    // Add Section Header
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.id = sectionId;
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+
+                    // Add Nav Button dynamically
+                    const navBtn = document.createElement('button');
+                    // Abbreviate longer titles for the buttons if desired
+                    let btnText = currentSection;
+                    if (btnText.includes("Diagnostic Approach")) btnText = "Dx Approach Lung Cancer";
+                    if (btnText.includes("Management of Lung Cancer")) btnText = "Management of Lung Cancer";
+                    
+                    navBtn.textContent = btnText;
+                    navBtn.onclick = () => {
+                        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                    };
+                    sectionNav.appendChild(navBtn);
+
+                    sectionIndex++;
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.innerHTML = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.innerHTML = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const[key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    // Retain letters: A. Option Text
+                    span.innerHTML = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.innerHTML = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
